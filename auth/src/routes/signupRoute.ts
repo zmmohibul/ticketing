@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
+import { ErrorResponse } from "../errors/error-response";
 import { RequestValidationError } from "../errors/request-validation-error";
 
 const router = express.Router();
@@ -18,7 +19,7 @@ router.post(
 
     if (!errors.isEmpty()) {
       const responseErrors = new RequestValidationError(errors.array());
-      return res.status(responseErrors.statusCode).send({ message: responseErrors.message, errors: responseErrors.errors });
+      return res.status(responseErrors.statusCode).send(new ErrorResponse(responseErrors.statusCode, responseErrors.message, responseErrors.errors));
     }
     res.send("Hi there!");
 });
