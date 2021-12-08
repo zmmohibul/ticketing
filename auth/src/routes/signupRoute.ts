@@ -19,7 +19,7 @@ router.post(
 
     if (!errors.isEmpty()) {
       const responseErrors = new RequestValidationError(errors.array());
-      return res.status(responseErrors.statusCode).send(new ErrorResponse(responseErrors.statusCode, responseErrors.message, responseErrors.errors as []));
+      return res.status(responseErrors.statusCode).send(new ErrorResponse(responseErrors.statusCode, responseErrors.message, responseErrors.serializeErrors()));
     }
     res.send("Hi there!");
 });
