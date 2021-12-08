@@ -5,6 +5,6 @@ export class ErrorResponse {
   (
     public statusCode: number,
     public message: string,
-    public errors: ValidationError[]
+    public errors: []
   ) {}
 }
